@@ -75,6 +75,7 @@ Note:
 With reference to tables created in Problem 1, write an SQL query to retrieve the customer names, order dates, and total amounts for all orders placed by customers from the city 'New York'.
 
 **Bonus**: Modify the query to include the average total amount per customer for orders placed in the city 'New York'.
+
 2. SELECT customer.customer_name AS customer_name, orders.order_date, orders.total_amount FROM customer JOIN orders ON customer.customer_id = orders.customer_id WHERE customer.city = 'New York';
 
 ### Problem 3 - Sales Analysis
@@ -82,6 +83,7 @@ With reference to tables created in Problem 1, write an SQL query to retrieve th
 With reference to tables created in Problem 1, write an SQL query to calculate the total quantity sold and the average quantity sold per order.
 
 **Bonus**: Modify the query to include the total sales amount and average sales amount per order.
+
 3. SELECT  orders.order_id, SUM(sales.quantity) AS total_quantity_sold, AVG(sales.quantity) AS average_quantity_per_order FROM orders orders JOIN sales sales ON orders.order_id = sales.order_id GROUP BY orders.order_id;
 
 ### Problem 4 - Update Product Price
@@ -89,6 +91,7 @@ With reference to tables created in Problem 1, write an SQL query to calculate t
 With reference to tables created in Problem 1, write an SQL query to update the price of a specific product by specifying the `product_id`.
 
 **Bonus**: Modify the query to update the price of all products by increasing it by 10%.
+
 4. UPDATE inventories SET price = 2000.00 WHERE product_id = '2';
 UPDATE inventories SET price = price * 1.10;
 
@@ -97,6 +100,7 @@ UPDATE inventories SET price = price * 1.10;
 With reference to tables created in Problem 1, write an SQL query to calculate the average salary for each department.
 
 **Bonus**: Modify the query to calculate the highest salary for each department and retrieve the department name, highest salary, and the employee(s) with that salary.
+
 5. SELECT AVG(salary) AS average_salary FROM employees;
 
 ### Problem 6 - Retrieve Employees with High Salary
@@ -104,6 +108,7 @@ With reference to tables created in Problem 1, write an SQL query to calculate t
 With reference to tables created in Problem 1, write an SQL query to retrieve the names and positions of all employees with a salary greater than $50,000.
 
 **Bonus**: Modify the query to retrieve the names, positions, and salaries of the top three highest-paid employees.
+
 6. SELECT name, position FROM employees WHERE salary > 50000;
 
 ### Problem 7 - Delete Customer
@@ -111,6 +116,7 @@ With reference to tables created in Problem 1, write an SQL query to retrieve th
 With reference to the tables created in Problem 1, write an SQL statement to delete a specific customer. You can specify the customer to delete by their `customer_id`.
 
 **Bonus**: Modify the query to delete any related records associated with the customer being deleted to maintain data integrity.
+
 7. DELETE FROM customer WHERE customer_id = '12';
 
 ### Problem 8 - Query Performance Optimization
@@ -128,5 +134,6 @@ With reference to the tables created in Problem 1, analyze the query and propose
 Explain your reasoning behind choosing the specific column(s) for the index(es) and how they would enhance the execution of the query. Consider the selectivity of the columns, the order of the conditions, and any other factors that may impact the query performance.
 
 **Bonus**: Discuss any potential trade-offs or drawbacks of implementing the suggested index(es), such as increased storage space or impact on write operations.
+
 8. CREATE INDEX index_department_salary ON employees (department, salary);
 A composite index allows the database to quickly locate relevant rows based on the combined conditions. Without the index, the database might need to perform a full table scan to evaluate all rows. With the index, the query engine can directly navigate to the relevant rows which can reduce the search space.
